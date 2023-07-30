@@ -1,7 +1,7 @@
+///
 library flutter_google_places.src;
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -467,18 +467,11 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
   }
 
   Future<void> _initPlaces() async {
-    final headers = <String, String>{};
-    try {
-      final h = await const GoogleApiHeaders().getHeaders();
-      headers.addAll(h);
-    } catch (e) {
-      log("GooglePlaces error: $e", name: "GoogleApiHeaders.getHeaders");
-    }
     _places = GoogleMapsPlaces(
       apiKey: widget.apiKey,
       baseUrl: widget.proxyBaseUrl,
       httpClient: widget.httpClient,
-      apiHeaders: headers,
+      apiHeaders: await const GoogleApiHeaders().getHeaders(),
     );
   }
 

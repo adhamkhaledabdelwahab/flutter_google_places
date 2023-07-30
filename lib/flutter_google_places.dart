@@ -1,3 +1,4 @@
+///
 library flutter_google_places;
 
 export 'src/flutter_google_places.dart';
